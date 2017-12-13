@@ -37,5 +37,4 @@ RUN chmod +x /entrypoint.sh
 
 EXPOSE 3001 3002 9000
 
-#CMD [ "pm2-docker", "start", "pm2.json" ]
 ENTRYPOINT ["/entrypoint.sh"]
