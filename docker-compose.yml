@@ -1,0 +1,60 @@
+version: '2.1'
+services:
+  database:
+    container_name: database
+    image: elasticsearch:2
+    restart: always
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  rabbitmq:
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    hostname: rabbitmq
+    image: rabbitmq:3.6.6
+    restart: always
+    ports:
+      - "25672:25672"
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+  zookeeper:
+    image: zookeeper:3.4
+    container_name: zookeeper
+    restart: always
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper:2888:3888
+  backend:
+    container_name: backend
+    image: cmbackend:1.0.latest
+    restart: always
+    links:
+      - database
+      - zookeeper
+    ports:
+      - "3001:3001"
+      - "3002:3002"
+    volumes:
+      - /home/mvox/data:/celldata-parser/data
+    depends_on:
+      - "database"
+volumes:
+  esdata1:
+    driver: local
+

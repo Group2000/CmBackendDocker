@@ -1,0 +1,38 @@
+{
+  "apps": [
+  {
+    "name": "webservice-wifi",
+	"cwd": "webservice-wifi",
+    "script": "webservice-wifi.js",
+    "env": {
+      "production": false
+    }
+  },
+  {
+    "name": "webservice-cells",
+	"cwd": "webservice-cells",
+    "script": "webservice-cells.js",
+    "env": {
+      "production": false
+    }
+  },
+  {
+    "name": "measurement-amqp2es",
+	"cwd": "measurement-amqp2es",
+    "script": "measurement-amqp2es.js",
+    "env": {
+      "production": false
+    }
+  },
+  {
+    "name": "celldata-parser",
+	"cwd": "celldata-parser",
+    "script": "celldata-parser.js",
+    "env": {
+      "production": false
+    }
+  }
+  ]
+}
+
+
