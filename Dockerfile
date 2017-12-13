@@ -32,8 +32,10 @@ WORKDIR cellmapping-frontend
 RUN npm install
 WORKDIR /
 
-COPY config/pm2.json .
+COPY config/pm2.json config/entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 3001 3002 9000
 
-CMD [ "pm2-docker", "start", "pm2.json" ]
+#CMD [ "pm2-docker", "start", "pm2.json" ]
+ENTRYPOINT ["/entrypoint.sh"]
