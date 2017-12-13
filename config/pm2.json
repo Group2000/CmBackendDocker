@@ -31,6 +31,14 @@
     "env": {
       "production": false
     }
+  },
+  {
+    "name": "cellmapping-frontend",
+	"cwd": "cellmapping-frontend",
+    "script": "cellmapping-frontend.js",
+    "env": {
+      "production": false
+    }
   }
   ]
 }
