@@ -6,9 +6,8 @@ RUN apk add --no-cache git
 RUN git clone -b docker https://github.com/Group2000/webservice-wifi.git \
 && git clone -b docker https://github.com/Group2000/celldata-parser.git \
 && git clone -b docker https://github.com/Group2000/webservice-cells.git \
-&& git clone -b docker https://github.com/Group2000/measurement-amqp2es.git 
-#\
-#&& git clone https://github.com/Group2000/cellmapping-frontend.git
+&& git clone -b docker https://github.com/Group2000/measurement-amqp2es.git \
+&& git clone -b docker https://github.com/Group2000/cellmapping-frontend.git
 
 WORKDIR /webservice-wifi
 RUN npm install
@@ -27,8 +26,14 @@ RUN npm install
 WORKDIR /
 VOLUME /celldata-parser/data
 
+RUN npm install -g bower 
+#grunt-cli 
+WORKDIR cellmapping-frontend
+RUN npm install
+WORKDIR /
+
 COPY config/pm2.json .
 
-EXPOSE 3001 3002
+EXPOSE 3001 3002 9000
 
 CMD [ "pm2-docker", "start", "pm2.json" ]

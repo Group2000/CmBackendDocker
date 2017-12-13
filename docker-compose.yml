@@ -15,8 +15,8 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - 9200:9200
+      - 9300:9300
   rabbitmq:
     container_name: rabbitmq
     environment:
@@ -26,10 +26,7 @@ services:
     image: rabbitmq:3.6.6
     restart: always
     ports:
-      - "25672:25672"
-      - "4369:4369"
-      - "5671:5671"
-      - "5672:5672"
+      - 25672:25672
   zookeeper:
     image: zookeeper:3.4
     container_name: zookeeper
@@ -44,16 +41,25 @@ services:
     container_name: backend
     image: cmbackend:1.0.latest
     restart: always
+    environment:
+      - SERVERIP=192.168.100.46
     links:
       - database
       - zookeeper
     ports:
-      - "3001:3001"
-      - "3002:3002"
+      - 3001:3001
+      - 3002:3002
+      - 80:9000
     volumes:
       - /home/mvox/data:/celldata-parser/data
     depends_on:
       - "database"
+  osm-proxy:
+    image: group2000/osm-proxy
+    container_name: osm-proxy
+    restart: always
+    ports:
+      - 81:80
 volumes:
   esdata1:
     driver: local
