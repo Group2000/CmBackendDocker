@@ -39,7 +39,7 @@ services:
       ZOO_SERVERS: server.1=zookeeper:2888:3888
   backend:
     container_name: backend
-    image: cmbackend:1.0.latest
+    image: group2000/cmbackend
     restart: always
     environment:
       - SERVERIP=192.168.100.46
@@ -59,7 +59,7 @@ services:
     container_name: osm-proxy
     restart: always
     ports:
-      - 81:80
+      - 8080:80
 volumes:
   esdata1:
     driver: local
