@@ -27,7 +27,6 @@ WORKDIR /
 VOLUME /celldata-parser/data
 
 RUN npm install -g bower 
-#grunt-cli 
 WORKDIR cellmapping-frontend
 RUN npm install
 WORKDIR /
