@@ -8,3 +8,5 @@ For Elasticsearch the max map count has to be increased on the host system:
 Edit /etc/sysctl.conf and add the line: "vm.max_map_count=262144"
 
 Also take not of SELinux, change the setting of the volume directories with "chcon -Rt svirt_sandbox_file_t <directory>"
+
+The web interface runs on the default http port.
